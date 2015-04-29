@@ -6,7 +6,7 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.aa.forms.frmBaslangic;
+import com.aa.forms.frmStart;
 
 public class ClientSocketConnect {
 	
@@ -16,7 +16,7 @@ public class ClientSocketConnect {
 	public ClientSocketConnect(JTextField txtIp, JTextField txtPortBaglan)
 	{
 		if (txtIp.getText().equals("")||txtPortBaglan.getText().equals("")) {
-			JOptionPane.showMessageDialog(new frmBaslangic().getContentPane(),"ip ve port bilgisi bos olamaz...");
+			JOptionPane.showMessageDialog(new frmStart().getContentPane(),"ip ve port bilgisi bos olamaz...");
 		}
 		else
 		{

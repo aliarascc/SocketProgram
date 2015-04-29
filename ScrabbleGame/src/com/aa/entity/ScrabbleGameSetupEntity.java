@@ -2,79 +2,79 @@ package com.aa.entity;
 
 import javax.swing.JTextField;
 
-public class ScrabbleGameOyunKurEntity {
-	private JTextField _oyunAlaniX;
-	private JTextField _oyunAlaniY;
-	private JTextField _kullanilmazBolgeSayisi;
-	private JTextField _kazanmaPuani;
-	private JTextField _toplamOyun;
-	private JTextField _sayi2x;
-	private JTextField _sayi3x;
-	private JTextField _portAc;
+public class ScrabbleGameSetupEntity {
+	private JTextField oyunAlaniX;
+	private JTextField oyunAlaniY;
+	private JTextField kullanilmazBolgeSayisi;
+	private JTextField kazanmaPuani;
+	private JTextField toplamOyun;
+	private JTextField sayi2x;
+	private JTextField sayi3x;
+	private JTextField portAc;
 	private int QUEUELENGTH;
 
 	public JTextField get_oyunAlaniX() {
-		return _oyunAlaniX;
+		return oyunAlaniX;
 	}
 
 	public void set_oyunAlaniX(JTextField _oyunAlaniX) {
-		this._oyunAlaniX = _oyunAlaniX;
+		this.oyunAlaniX = _oyunAlaniX;
 	}
 
 	public JTextField get_oyunAlaniY() {
-		return _oyunAlaniY;
+		return oyunAlaniY;
 	}
 
 	public void set_oyunAlaniY(JTextField _oyunAlaniY) {
-		this._oyunAlaniY = _oyunAlaniY;
+		this.oyunAlaniY = _oyunAlaniY;
 	}
 
 	public JTextField get_kullanilmazBolgeSayisi() {
-		return _kullanilmazBolgeSayisi;
+		return kullanilmazBolgeSayisi;
 	}
 
 	public void set_kullanilmazBolgeSayisi(JTextField _kullanilmazBolgeSayisi) {
-		this._kullanilmazBolgeSayisi = _kullanilmazBolgeSayisi;
+		this.kullanilmazBolgeSayisi = _kullanilmazBolgeSayisi;
 	}
 
 	public JTextField get_kazanmaPuani() {
-		return _kazanmaPuani;
+		return kazanmaPuani;
 	}
 
 	public void set_kazanmaPuani(JTextField _kazanmaPuani) {
-		this._kazanmaPuani = _kazanmaPuani;
+		this.kazanmaPuani = _kazanmaPuani;
 	}
 
 	public JTextField get_toplamOyun() {
-		return _toplamOyun;
+		return toplamOyun;
 	}
 
 	public void set_toplamOyun(JTextField _toplamOyun) {
-		this._toplamOyun = _toplamOyun;
+		this.toplamOyun = _toplamOyun;
 	}
 
 	public JTextField get_sayi2x() {
-		return _sayi2x;
+		return sayi2x;
 	}
 
 	public void set_sayi2x(JTextField _sayi2x) {
-		this._sayi2x = _sayi2x;
+		this.sayi2x = _sayi2x;
 	}
 
 	public JTextField get_sayi3x() {
-		return _sayi3x;
+		return sayi3x;
 	}
 
 	public void set_sayi3x(JTextField _sayi3x) {
-		this._sayi3x = _sayi3x;
+		this.sayi3x = _sayi3x;
 	}
 
 	public JTextField get_portAc() {
-		return _portAc;
+		return portAc;
 	}
 
 	public void set_portAc(JTextField _portAc) {
-		this._portAc = _portAc;
+		this.portAc = _portAc;
 	}
 
 	public int getQUEUELENGTH() {
