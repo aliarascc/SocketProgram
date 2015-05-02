@@ -3,6 +3,7 @@ package com.aa.client;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -13,9 +14,9 @@ public class ClientSocketConnect {
 	@SuppressWarnings("unused")
 	private Socket client;
 	
-	public ClientSocketConnect(JTextField txtIp, JTextField txtPortBaglan)
+	public ClientSocketConnect(JTextField txtIp, JComboBox<String> txtPortBaglan)
 	{
-		if (txtIp.getText().equals("")||txtPortBaglan.getText().equals("")) {
+		if (txtIp.getText().equals("")||txtPortBaglan.getSelectedItem().toString().equals("")) {
 			JOptionPane.showMessageDialog(new frmStart().getContentPane(),"ip ve port bilgisi bos olamaz...");
 		}
 		else
@@ -23,7 +24,7 @@ public class ClientSocketConnect {
 			try 
 			{
 				InetAddress address = InetAddress.getByName(txtIp.getText());
-				client=new Socket(address,Integer.parseInt(txtPortBaglan.getText()));
+				client=new Socket(address,Integer.parseInt(txtPortBaglan.getSelectedItem().toString()));
 				System.out.println("client banlandi...");
 			} 
 			catch (Exception e) 

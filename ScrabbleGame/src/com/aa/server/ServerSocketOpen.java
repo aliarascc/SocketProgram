@@ -12,7 +12,6 @@ public class ServerSocketOpen extends Thread {
 
 	@SuppressWarnings("unused")
 	private ServerSocket socket = null;
-
 	public ServerSocketOpen(JTextField txtPortAc, int QUEUELENGTH) {
 		try {
 			socket = new ServerSocket(Integer.parseInt(txtPortAc.getText()),
@@ -28,17 +27,17 @@ public class ServerSocketOpen extends Thread {
 	@SuppressWarnings("deprecation")
 	public ServerSocketOpen(ScrabbleGameSetupEntity oyunEntity) {
 		try {
-			if (oyunEntity.get_portAc().getText().length() > 5|| 
-			   (oyunEntity.get_portAc().getText().toString().equals("")&& 
-			    oyunEntity.get_oyunAlaniX().getText().toString().equals("")&&
-			    oyunEntity.get_oyunAlaniY().getText().toString().equals(""))) 
+			if (oyunEntity.getPortAc().getText().length() > 5|| 
+			   (oyunEntity.getPortAc().getText().toString().equals("")&& 
+			    oyunEntity.getOyunAlaniX().getText().toString().equals("")&&
+			    oyunEntity.getOyunAlaniY().getText().toString().equals(""))) 
 			{
 				JOptionPane.showMessageDialog(null,"port numarasi hatali girildi\nX ve/veya Y degerleri hatali girildi",
 								"Hata", JOptionPane.ERROR_MESSAGE);
 			} 
 			else 
 			{							
-				socket = new ServerSocket(Integer.parseInt(oyunEntity.get_portAc().getText().toString()),oyunEntity.getQUEUELENGTH());
+				socket = new ServerSocket(Integer.parseInt(oyunEntity.getPortAc().getText().toString()),oyunEntity.getQUEUELENGTH());
 				System.out.println("ServerSocket acildi...");
 				frmGame oyun = new frmGame(oyunEntity);
 				oyun.show();

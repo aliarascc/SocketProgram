@@ -1,6 +1,12 @@
 package com.aa.entity;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JTextField;
+
+import com.aa.dictionary.DictionaryList;
 
 public class ScrabbleGameSetupEntity {
 	private JTextField oyunAlaniX;
@@ -12,68 +18,115 @@ public class ScrabbleGameSetupEntity {
 	private JTextField sayi3x;
 	private JTextField portAc;
 	private int QUEUELENGTH;
+	private JList<String> list;
+	private DefaultListModel<String> model;
+	private ArrayList<JTextField> spotList;
 
-	public JTextField get_oyunAlaniX() {
+	public ArrayList<JTextField> getSpotList() {
+		return spotList;
+	}
+
+	public void setSpotList(ArrayList<JTextField> spotList) {
+		this.spotList = spotList;
+	}
+
+	public DictionaryList getDictionary() {
+		return dictionary;
+	}
+
+	public void setDictionary(DictionaryList dictionary) {
+		this.dictionary = dictionary;
+	}
+
+	private DictionaryList dictionary;
+
+	public String getGamername() {
+		return gamername;
+	}
+
+	public void setGamername(String gamername) {
+		this.gamername = gamername;
+	}
+
+	private String gamername;
+
+	public JList<String> getList() {
+		return list;
+	}
+
+	public void setList(JList<String> list) {
+		this.list = list;
+	}
+
+	public DefaultListModel<String> getModel() {
+		return model;
+	}
+
+	public void setModel(DefaultListModel<String> model) {
+		this.model = model;
+	}
+
+	public JTextField getOyunAlaniX() {
 		return oyunAlaniX;
 	}
 
-	public void set_oyunAlaniX(JTextField _oyunAlaniX) {
+	public void setOyunAlaniX(JTextField _oyunAlaniX) {
 		this.oyunAlaniX = _oyunAlaniX;
 	}
 
-	public JTextField get_oyunAlaniY() {
+	public JTextField getOyunAlaniY() {
 		return oyunAlaniY;
 	}
 
-	public void set_oyunAlaniY(JTextField _oyunAlaniY) {
+	public void setOyunAlaniY(JTextField _oyunAlaniY) {
 		this.oyunAlaniY = _oyunAlaniY;
 	}
 
-	public JTextField get_kullanilmazBolgeSayisi() {
+	public JTextField getKullanilmazBolgeSayisi() {
 		return kullanilmazBolgeSayisi;
 	}
 
-	public void set_kullanilmazBolgeSayisi(JTextField _kullanilmazBolgeSayisi) {
+	public void setKullanilmazBolgeSayisi(JTextField _kullanilmazBolgeSayisi) {
 		this.kullanilmazBolgeSayisi = _kullanilmazBolgeSayisi;
 	}
 
-	public JTextField get_kazanmaPuani() {
+	public JTextField getKazanmaPuani() {
 		return kazanmaPuani;
 	}
 
-	public void set_kazanmaPuani(JTextField _kazanmaPuani) {
+	public void setKazanmaPuani(JTextField _kazanmaPuani) {
 		this.kazanmaPuani = _kazanmaPuani;
 	}
 
-	public JTextField get_toplamOyun() {
+	public JTextField getToplamOyun() {
 		return toplamOyun;
 	}
 
-	public void set_toplamOyun(JTextField _toplamOyun) {
+	public void setToplamOyun(JTextField _toplamOyun) {
 		this.toplamOyun = _toplamOyun;
 	}
 
-	public JTextField get_sayi2x() {
+	public JTextField getSayi2x() {
 		return sayi2x;
 	}
 
-	public void set_sayi2x(JTextField _sayi2x) {
+	public void setSayi2x(JTextField _sayi2x) {
 		this.sayi2x = _sayi2x;
 	}
 
-	public JTextField get_sayi3x() {
+	public JTextField getSayi3x() {
 		return sayi3x;
 	}
 
-	public void set_sayi3x(JTextField _sayi3x) {
+	public void setSayi3x(JTextField _sayi3x) {
 		this.sayi3x = _sayi3x;
 	}
 
-	public JTextField get_portAc() {
+	public JTextField getPortAc() {
 		return portAc;
 	}
 
-	public void set_portAc(JTextField _portAc) {
+	public void setPortAc(JTextField _portAc) {
 		this.portAc = _portAc;
 	}
 

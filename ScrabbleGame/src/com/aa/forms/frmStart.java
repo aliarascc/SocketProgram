@@ -14,8 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.aa.client.ClientSocketConnect;
+import com.aa.dictionary.DictionaryList;
 import com.aa.entity.ScrabbleGameSetupEntity;
 import com.aa.server.ServerSocketOpen;
+
+import javax.swing.JComboBox;
 
 public class frmStart extends JFrame {
 
@@ -36,7 +39,6 @@ public class frmStart extends JFrame {
 	private JLabel lblOyunaKatil;
 	private JTextField txtIp;
 	private JTextField txtPortAc;
-	private JTextField txtPortBaglan;
 	private JTextField txtKullaniciAdi;
 	private JButton btnOyunKur;
 	private JLabel lblIp;
@@ -47,7 +49,11 @@ public class frmStart extends JFrame {
 	private JLabel lblPortKatil;
 	private JLabel lblKullaniciAdi;
 	private JButton btnOyunaKatil;
-
+	private JComboBox<String> cmbPortBaglan;
+	private DictionaryList dictionary;
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -146,23 +152,28 @@ public class frmStart extends JFrame {
 		contentPane.add(lblOyunaKatil);
 
 		btnOyunKur = new JButton("Oyun Kur");
+		dictionary = new DictionaryList();
 		btnOyunKur.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					ScrabbleGameSetupEntity oyun = new ScrabbleGameSetupEntity();
-					oyun.set_portAc(txtPortAc);
-					oyun.set_kazanmaPuani(txtKazanmaPuani);
-					oyun.set_kullanilmazBolgeSayisi(txtKullanilmazBolgeSayisi);
-					oyun.set_oyunAlaniX(txtOyunAlaniX);
-					oyun.set_oyunAlaniY(txtOyunAlaniY);
-					oyun.set_sayi2x(txt2xSayisi);
-					oyun.set_sayi3x(txt3xSayisi);
-					oyun.set_toplamOyun(txtToplamOyun);
-					oyun.setQUEUELENGTH(10);
-
+					ScrabbleGameSetupEntity oyunKur = new ScrabbleGameSetupEntity();
+					//ScrabbleGameEnterEntity oyunBaglan = new ScrabbleGameEnterEntity();
+					oyunKur.setPortAc(txtPortAc);
+					oyunKur.setKazanmaPuani(txtKazanmaPuani);
+					oyunKur.setKullanilmazBolgeSayisi(txtKullanilmazBolgeSayisi);
+					oyunKur.setOyunAlaniX(txtOyunAlaniX);
+					oyunKur.setOyunAlaniY(txtOyunAlaniY);
+					oyunKur.setSayi2x(txt2xSayisi);
+					oyunKur.setSayi3x(txt3xSayisi);
+					oyunKur.setToplamOyun(txtToplamOyun);
+					oyunKur.setQUEUELENGTH(10);
+					oyunKur.setGamername("aliaras");
+					cmbPortBaglan.addItem(txtPortAc.getText().toString());
+					oyunKur.setDictionary(dictionary);
+					
 					@SuppressWarnings("unused")
-					ServerSocketOpen serversocketAc = new ServerSocketOpen(oyun);
+					ServerSocketOpen serversocketAc = new ServerSocketOpen(oyunKur);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -196,11 +207,6 @@ public class frmStart extends JFrame {
 		lblPortKatil.setBounds(166, 217, 100, 14);
 		contentPane.add(lblPortKatil);
 
-		txtPortBaglan = new JTextField();
-		txtPortBaglan.setColumns(10);
-		txtPortBaglan.setBounds(278, 214, 99, 20);
-		contentPane.add(txtPortBaglan);
-
 		lblKullaniciAdi = new JLabel("Kullan\u0131c\u0131 Ad\u0131:");
 		lblKullaniciAdi.setBounds(166, 243, 100, 14);
 		contentPane.add(lblKullaniciAdi);
@@ -216,7 +222,7 @@ public class frmStart extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					ClientSocketConnect clientConnet = new ClientSocketConnect(
-							txtIp, txtPortBaglan);
+							txtIp, cmbPortBaglan);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
@@ -225,6 +231,10 @@ public class frmStart extends JFrame {
 		btnOyunaKatil.setFont(new Font("Showcard Gothic", Font.PLAIN, 11));
 		btnOyunaKatil.setBounds(6, 271, 517, 23);
 		contentPane.add(btnOyunaKatil);
+		
+		cmbPortBaglan = new JComboBox<String>();
+		cmbPortBaglan.setBounds(278, 214, 99, 20);
+		contentPane.add(cmbPortBaglan);
 	}
 
 	public frmStart() {
