@@ -19,15 +19,15 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
+import com.aa.entity.ScrabbleGameEnterEntity;
 import com.aa.entity.ScrabbleGameSetupEntity;
-import com.aa.logic.ElectionLojic;
-import com.aa.logic.UniqueRandomNumbers;
+import com.aa.logic.BoardPosition;
 
 public class frmGame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private int X, Y, row, column;;
+	private int X, Y;
 	private GridLayout gridLayout;
 	private JPanel panel_table;
 	private JPanel panel_info;
@@ -52,10 +52,12 @@ public class frmGame extends JFrame {
 	private JLabel lblToplamOyun;
 	private JLabel lbl2xSayisi;
 	private JLabel lbl3xSayisi;
-	private JTextField[][] spot;
-	private UniqueRandomNumbers uniqueRandom;
-	private ArrayList<JTextField> spotList;
-	private ElectionLojic election;
+	private JButton[][] spot;
+	private ArrayList<JButton> spotList;
+	private ArrayList<String> dictionary;
+	private BoardPosition election;
+	Color color1, color2;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -169,9 +171,10 @@ public class frmGame extends JFrame {
 
 	}
 
-	public frmGame(ScrabbleGameSetupEntity oyunEntity) {
-		if (!oyunEntity.getOyunAlaniX().getText().equals("")&& !oyunEntity.getOyunAlaniY().getText().equals("")) 
-		{
+	public frmGame(ScrabbleGameSetupEntity oyunEntity,
+			ScrabbleGameEnterEntity oyunSetup) {
+		if (!oyunEntity.getOyunAlaniX().getText().equals("")
+				&& !oyunEntity.getOyunAlaniY().getText().equals("")) {
 			X = Integer.parseInt(oyunEntity.getOyunAlaniX().getText());
 			Y = Integer.parseInt(oyunEntity.getOyunAlaniY().getText());
 
@@ -243,7 +246,8 @@ public class frmGame extends JFrame {
 			panel_info.add(lblOyuncuListesi, "cell 0 8");
 
 			oyuncuModel = new DefaultListModel<String>();
-			oyuncuModel.add(0, oyunEntity.getGamername().toString());
+			oyuncuModel
+					.add(0, oyunSetup.getKullaniciAdi().getText().toString());
 			list = new JList<String>(oyuncuModel);
 			panel_info.add(list, "cell 0 9 2 1,grow");
 
@@ -266,46 +270,43 @@ public class frmGame extends JFrame {
 			btnGonder = new JButton("G\u00F6nder");
 			panel_play.add(btnGonder, "cell 0 1");
 
-			spot = new JTextField[gridLayout.getRows()][gridLayout.getColumns()];
-			spotList = new ArrayList<JTextField>();
+			spot = new JButton[gridLayout.getRows()][gridLayout.getColumns()];
+			spotList = new ArrayList<JButton>();
 
 			lblKazanmapuani.setText(oyunEntity.getKazanmaPuani().getText().toString());
 			lbl2xSayisi.setText(oyunEntity.getSayi2x().getText().toString());
 			lbl3xSayisi.setText(oyunEntity.getSayi3x().getText().toString());
 			lblKullanilamazbolgesayisi.setText(oyunEntity.getKullanilmazBolgeSayisi().getText().toString());
-			lblOyunAlani.setText(oyunEntity.getOyunAlaniX().getText().toString()+ "x" + oyunEntity.getOyunAlaniY().getText().toString());
+			lblOyunAlani.setText(oyunEntity.getOyunAlaniX().getText().toString()
+					+ "x" + oyunEntity.getOyunAlaniY().getText().toString());
 			lblToplamOyun.setText(oyunEntity.getToplamOyun().getText().toString());
 
-			oyunEntity.getDictionary();
-			uniqueRandom = new UniqueRandomNumbers(X,Y);
+			dictionary = oyunEntity.getDictionary();
 
 			for (int i = 0; i < gridLayout.getColumns(); i++) {
 				for (int j = 0; j < gridLayout.getRows(); j++) {
-					spot[i][j] = new JTextField(i + "," + j);
+					spot[i][j] = new JButton();
 					spotList.add(spot[i][j]);
 					oyunEntity.setSpotList(spotList);
 					panel_table.add(spot[i][j]);
 				}
 			}
-			election = new ElectionLojic(oyunEntity);
+			election = new BoardPosition(oyunEntity);
 
-			for (int k = 0; k < Integer.parseInt(oyunEntity.getKullanilmazBolgeSayisi().getText()); k++) 
-			{
-				election.getUniqueSpot().setVisible(false);;
+			for (int k = 0; k < Integer.parseInt(oyunEntity
+					.getKullanilmazBolgeSayisi().getText()); k++) {
+				election.getUniqueSpot().setVisible(false);
 			}
 
-			for (int i = 0; i < Integer.parseInt(oyunEntity.getSayi2x().getText()); i++) {
-				//row = uniqueRandom.getUniqueX();
-				//column = uniqueRandom.getUniqueY();
-				//spot[row][column].setBackground(Color.yellow);
+			for (int i = 0; i < Integer.parseInt(oyunEntity.getSayi2x()
+					.getText()); i++) {
 				election.getUniqueSpot().setBackground(Color.yellow);
-
+				election.getUniqueSpot().setText("2x");
 			}
-			for (int i = 0; i < Integer.parseInt(oyunEntity.getSayi3x().getText()); i++) {
-				//row = uniqueRandom.getUniqueX();
-				//column = uniqueRandom.getUniqueY();
-				//spot[row][column].setBackground(Color.green);
+			for (int i = 0; i < Integer.parseInt(oyunEntity.getSayi3x()
+					.getText()); i++) {
 				election.getUniqueSpot().setBackground(Color.green);
+				election.getUniqueSpot().setText("3x");
 			}
 
 		} else {

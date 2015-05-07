@@ -1,5 +1,5 @@
 package com.aa.logic;
 
-public class GameScore {
+public class UserScore {
 
 }

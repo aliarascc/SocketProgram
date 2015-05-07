@@ -3,10 +3,11 @@ package com.aa.entity;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
-import com.aa.dictionary.DictionaryList;
+import com.aa.logic.DictionaryList;
 
 public class ScrabbleGameSetupEntity {
 	private JTextField oyunAlaniX;
@@ -20,16 +21,17 @@ public class ScrabbleGameSetupEntity {
 	private int QUEUELENGTH;
 	private JList<String> list;
 	private DefaultListModel<String> model;
-	private ArrayList<JTextField> spotList;
+	private ArrayList<JButton> spotList;
+	private DictionaryList dictionary;
 
-	public ArrayList<JTextField> getSpotList() {
+	public ArrayList<JButton> getSpotList() {
 		return spotList;
 	}
 
-	public void setSpotList(ArrayList<JTextField> spotList) {
+	public void setSpotList(ArrayList<JButton> spotList) {
 		this.spotList = spotList;
 	}
-
+	
 	public DictionaryList getDictionary() {
 		return dictionary;
 	}
@@ -37,18 +39,6 @@ public class ScrabbleGameSetupEntity {
 	public void setDictionary(DictionaryList dictionary) {
 		this.dictionary = dictionary;
 	}
-
-	private DictionaryList dictionary;
-
-	public String getGamername() {
-		return gamername;
-	}
-
-	public void setGamername(String gamername) {
-		this.gamername = gamername;
-	}
-
-	private String gamername;
 
 	public JList<String> getList() {
 		return list;

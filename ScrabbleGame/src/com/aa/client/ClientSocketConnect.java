@@ -7,12 +7,15 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import com.aa.entity.ScrabbleGameEnterEntity;
 import com.aa.forms.frmStart;
+import com.aa.logic.UsernameControl;
 
 public class ClientSocketConnect {
 	
 	@SuppressWarnings("unused")
 	private Socket client;
+	private UsernameControl unamecontrol;
 	
 	public ClientSocketConnect(JTextField txtIp, JComboBox<String> txtPortBaglan)
 	{
@@ -36,4 +39,19 @@ public class ClientSocketConnect {
 
 	}
 
+	public ClientSocketConnect(ScrabbleGameEnterEntity gameEnter)
+	{
+		unamecontrol=new UsernameControl();
+
+			if (!unamecontrol.controlUsername(gameEnter.getKullaniciAdi().getText().toString())) {
+				unamecontrol.addUsername(gameEnter.getKullaniciAdi().getText().toString());
+				System.out.println(unamecontrol.getUsernames());
+			}
+			else
+			{
+				System.out.println("olmadi");
+			}
+		
+	}
+	
 }

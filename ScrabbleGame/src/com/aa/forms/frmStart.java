@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,11 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.aa.client.ClientSocketConnect;
-import com.aa.dictionary.DictionaryList;
+import com.aa.entity.ScrabbleGameEnterEntity;
 import com.aa.entity.ScrabbleGameSetupEntity;
+import com.aa.logic.DictionaryList;
 import com.aa.server.ServerSocketOpen;
-
-import javax.swing.JComboBox;
 
 public class frmStart extends JFrame {
 
@@ -158,7 +158,7 @@ public class frmStart extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					ScrabbleGameSetupEntity oyunKur = new ScrabbleGameSetupEntity();
-					//ScrabbleGameEnterEntity oyunBaglan = new ScrabbleGameEnterEntity();
+					ScrabbleGameEnterEntity oyunBaglan = new ScrabbleGameEnterEntity();
 					oyunKur.setPortAc(txtPortAc);
 					oyunKur.setKazanmaPuani(txtKazanmaPuani);
 					oyunKur.setKullanilmazBolgeSayisi(txtKullanilmazBolgeSayisi);
@@ -168,12 +168,13 @@ public class frmStart extends JFrame {
 					oyunKur.setSayi3x(txt3xSayisi);
 					oyunKur.setToplamOyun(txtToplamOyun);
 					oyunKur.setQUEUELENGTH(10);
-					oyunKur.setGamername("aliaras");
 					cmbPortBaglan.addItem(txtPortAc.getText().toString());
-					oyunKur.setDictionary(dictionary);
+					oyunKur.setDictionary(dictionary);	
+					
+					oyunBaglan.setKullaniciAdi(txtKullaniciAdi);
 					
 					@SuppressWarnings("unused")
-					ServerSocketOpen serversocketAc = new ServerSocketOpen(oyunKur);
+					ServerSocketOpen serversocketAc = new ServerSocketOpen(oyunKur, oyunBaglan);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -220,9 +221,13 @@ public class frmStart extends JFrame {
 		btnOyunaKatil.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					ClientSocketConnect clientConnet = new ClientSocketConnect(
-							txtIp, cmbPortBaglan);
+				try 
+				{
+					ScrabbleGameEnterEntity oyunBaglan = new ScrabbleGameEnterEntity();
+					oyunBaglan.setKullaniciAdi(txtKullaniciAdi);
+					oyunBaglan.setIp(txtIp);
+					oyunBaglan.setPortBaglan(cmbPortBaglan);
+					ClientSocketConnect clientConnet = new ClientSocketConnect(oyunBaglan);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}

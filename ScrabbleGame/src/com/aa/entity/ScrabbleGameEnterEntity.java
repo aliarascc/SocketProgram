@@ -1,6 +1,7 @@
 package com.aa.entity;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
@@ -9,16 +10,7 @@ public class ScrabbleGameEnterEntity {
 	private DefaultListModel<String> model;
 	private JTextField ip;
 	private JTextField kullaniciAdi;
-	private JTextField portBaglan;
-	private String gamername;
-	
-	public String getGamername() {
-	return gamername;
-    }
-
-    public void setGamername(String gamername) {
-	this.gamername = gamername;
-    }
+	private JComboBox<String> portBaglan;
 
 	public JTextField getIp() {
 		return ip;
@@ -36,11 +28,11 @@ public class ScrabbleGameEnterEntity {
 		this.kullaniciAdi = kullaniciAdi;
 	}
 
-	public JTextField getPortBaglan() {
+	public JComboBox<String> getPortBaglan() {
 		return portBaglan;
 	}
 
-	public void setPortBaglan(JTextField portBaglan) {
+	public void setPortBaglan(JComboBox<String> portBaglan) {
 		this.portBaglan = portBaglan;
 	}
 

@@ -2,25 +2,25 @@ package com.aa.logic;
 
 import java.util.Collections;
 
-import javax.swing.JTextField;
+import javax.swing.JButton;
 
 import com.aa.entity.ScrabbleGameSetupEntity;
 
-public class ElectionLojic {
+public class BoardPosition {
 	private ScrabbleGameSetupEntity gameSetup;
-	private JTextField txt;
-	public ElectionLojic(ScrabbleGameSetupEntity gameSetup)
+	private JButton btn;
+	public BoardPosition(ScrabbleGameSetupEntity gameSetup)
 	{
 		this.gameSetup=gameSetup;
-		txt= new JTextField();
+		btn= new JButton();
 		Collections.shuffle(this.gameSetup.getSpotList());
 	}
 	
-	public JTextField getUniqueSpot()
+	public JButton getUniqueSpot()
 	{
-		txt=gameSetup.getSpotList().get(0);
+		btn=gameSetup.getSpotList().get(0);
 		gameSetup.getSpotList().remove(0);
-		return txt;
+		return btn;
 	}
 
 }
