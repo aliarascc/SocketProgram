@@ -4,12 +4,12 @@ import java.util.Collections;
 
 import javax.swing.JButton;
 
-import com.aa.entity.ScrabbleGameSetupEntity;
+import com.aa.entity.SetupEntity;
 
 public class BoardPosition {
-	private ScrabbleGameSetupEntity gameSetup;
+	private SetupEntity gameSetup;
 	private JButton btn;
-	public BoardPosition(ScrabbleGameSetupEntity gameSetup)
+	public BoardPosition(SetupEntity gameSetup)
 	{
 		this.gameSetup=gameSetup;
 		btn= new JButton();

@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.aa.entity.ScrabbleGameEnterEntity;
+import com.aa.entity.EnterEntity;
 import com.aa.forms.frmStart;
 import com.aa.logic.UsernameControl;
 
@@ -39,7 +39,7 @@ public class ClientSocketConnect {
 
 	}
 
-	public ClientSocketConnect(ScrabbleGameEnterEntity gameEnter)
+	public ClientSocketConnect(EnterEntity gameEnter)
 	{
 		unamecontrol=new UsernameControl();
 

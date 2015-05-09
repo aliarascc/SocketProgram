@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.aa.client.ClientSocketConnect;
-import com.aa.entity.ScrabbleGameEnterEntity;
-import com.aa.entity.ScrabbleGameSetupEntity;
-import com.aa.logic.DictionaryList;
+import com.aa.entity.EnterEntity;
+import com.aa.entity.SetupEntity;
+import com.aa.logic.Dictionary;
 import com.aa.server.ServerSocketOpen;
 
 public class frmStart extends JFrame {
@@ -50,7 +50,7 @@ public class frmStart extends JFrame {
 	private JLabel lblKullaniciAdi;
 	private JButton btnOyunaKatil;
 	private JComboBox<String> cmbPortBaglan;
-	private DictionaryList dictionary;
+	private Dictionary dictionary;
 	
 	
 	
@@ -152,13 +152,13 @@ public class frmStart extends JFrame {
 		contentPane.add(lblOyunaKatil);
 
 		btnOyunKur = new JButton("Oyun Kur");
-		dictionary = new DictionaryList();
+		dictionary = new Dictionary();
 		btnOyunKur.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					ScrabbleGameSetupEntity oyunKur = new ScrabbleGameSetupEntity();
-					ScrabbleGameEnterEntity oyunBaglan = new ScrabbleGameEnterEntity();
+					SetupEntity oyunKur = new SetupEntity();
+					EnterEntity oyunBaglan = new EnterEntity();
 					oyunKur.setPortAc(txtPortAc);
 					oyunKur.setKazanmaPuani(txtKazanmaPuani);
 					oyunKur.setKullanilmazBolgeSayisi(txtKullanilmazBolgeSayisi);
@@ -223,7 +223,7 @@ public class frmStart extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try 
 				{
-					ScrabbleGameEnterEntity oyunBaglan = new ScrabbleGameEnterEntity();
+					EnterEntity oyunBaglan = new EnterEntity();
 					oyunBaglan.setKullaniciAdi(txtKullaniciAdi);
 					oyunBaglan.setIp(txtIp);
 					oyunBaglan.setPortBaglan(cmbPortBaglan);

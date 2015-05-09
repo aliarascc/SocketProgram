@@ -2,8 +2,6 @@ package com.aa.forms;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -19,9 +17,11 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
-import com.aa.entity.ScrabbleGameEnterEntity;
-import com.aa.entity.ScrabbleGameSetupEntity;
+import com.aa.entity.EnterEntity;
+import com.aa.entity.SetupEntity;
 import com.aa.logic.BoardPosition;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class frmGame extends JFrame {
 
@@ -57,21 +57,10 @@ public class frmGame extends JFrame {
 	private ArrayList<String> dictionary;
 	private BoardPosition election;
 	Color color1, color2;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frmGame frame = new frmGame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	private void initComponent() {
+	
+	private void init()
+	{
+		gridLayout = new GridLayout(16, 16, 0, 0);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 520);
 		contentPane = new JPanel();
@@ -80,8 +69,8 @@ public class frmGame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		panel_table = new JPanel();
-		contentPane.add(panel_table, BorderLayout.NORTH);
-		panel_table.setLayout(new GridLayout(1, 0, 0, 0));
+		contentPane.add(panel_table, BorderLayout.CENTER);
+		panel_table.setLayout(gridLayout);
 
 		panel_info = new JPanel();
 		contentPane.add(panel_info, BorderLayout.WEST);
@@ -89,7 +78,6 @@ public class frmGame extends JFrame {
 				"[][][][][][][][][][grow]"));
 
 		lblOyunBilgileri = new JLabel("Oyun Bilgileri");
-		lblOyunBilgileri.setFont(new Font("Consolas", Font.BOLD, 11));
 		lblOyunBilgileri.setForeground(Color.BLUE);
 		lblOyunBilgileri.setBackground(Color.GRAY);
 		panel_info.add(lblOyunBilgileri, "cell 0 0");
@@ -102,7 +90,6 @@ public class frmGame extends JFrame {
 
 		lblKullanlamazBlgeSays = new JLabel(
 				"Kullan\u0131lamaz B\u00F6lge Say\u0131s\u0131:");
-		lblKullanlamazBlgeSays.setForeground(Color.RED);
 		panel_info.add(lblKullanlamazBlgeSays, "cell 0 2");
 
 		lblKullanilamazbolgesayisi = new JLabel("");
@@ -136,15 +123,10 @@ public class frmGame extends JFrame {
 		panel_info.add(lbl3xSayisi, "cell 1 6");
 
 		lblOyuncuListesi = new JLabel("Oyuncu Listesi");
-		lblOyuncuListesi.setFont(new Font("Consolas", Font.BOLD, 11));
 		lblOyuncuListesi.setForeground(Color.BLUE);
 		lblOyuncuListesi.setBackground(Color.GRAY);
 		panel_info.add(lblOyuncuListesi, "cell 0 8");
-
-		oyuncuModel = new DefaultListModel<String>();
-		list = new JList<String>(oyuncuModel);
-		panel_info.add(list, "cell 0 9 2 1,grow");
-
+		
 		panel_play = new JPanel();
 		contentPane.add(panel_play, BorderLayout.SOUTH);
 		panel_play.setLayout(new MigLayout("", "[grow]", "[][]"));
@@ -163,20 +145,23 @@ public class frmGame extends JFrame {
 
 		btnGonder = new JButton("G\u00F6nder");
 		panel_play.add(btnGonder, "cell 0 1");
-
+		
 	}
 
-	public frmGame() {
-		initComponent();
-
+	public frmGame()
+	{
+		init();
 	}
-
-	public frmGame(ScrabbleGameSetupEntity oyunEntity,
-			ScrabbleGameEnterEntity oyunSetup) {
-		if (!oyunEntity.getOyunAlaniX().getText().equals("")
-				&& !oyunEntity.getOyunAlaniY().getText().equals("")) {
-			X = Integer.parseInt(oyunEntity.getOyunAlaniX().getText());
-			Y = Integer.parseInt(oyunEntity.getOyunAlaniY().getText());
+	public frmGame(SetupEntity gameSetup, EnterEntity gameEnter) 
+	{
+		if (	!gameSetup.getOyunAlaniX().getText().equals("")
+				&& !gameSetup.getOyunAlaniY().getText().equals("")
+				&& !gameSetup.getKullanilmazBolgeSayisi().getText().equals("")
+				&& !gameSetup.getSayi2x().getText().equals("")
+				&& !gameSetup.getSayi3x().getText().equals("")) 
+		{
+			X = Integer.parseInt(gameSetup.getOyunAlaniX().getText());
+			Y = Integer.parseInt(gameSetup.getOyunAlaniY().getText());
 
 			gridLayout = new GridLayout(X, Y, 0, 0);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -247,7 +232,7 @@ public class frmGame extends JFrame {
 
 			oyuncuModel = new DefaultListModel<String>();
 			oyuncuModel
-					.add(0, oyunSetup.getKullaniciAdi().getText().toString());
+					.add(0, gameEnter.getKullaniciAdi().getText().toString());
 			list = new JList<String>(oyuncuModel);
 			panel_info.add(list, "cell 0 9 2 1,grow");
 
@@ -268,45 +253,60 @@ public class frmGame extends JFrame {
 			panel_play.add(btnTemizle, "cell 0 1");
 
 			btnGonder = new JButton("G\u00F6nder");
+			btnGonder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+						if(dictionary.contains(txtWord.getText().toString()))
+						{
+							txtWord.setBackground(Color.cyan);
+						}
+						else
+						{
+							txtWord.setBackground(Color.red);
+						}
+				}
+			});
+			
 			panel_play.add(btnGonder, "cell 0 1");
 
 			spot = new JButton[gridLayout.getRows()][gridLayout.getColumns()];
 			spotList = new ArrayList<JButton>();
 
-			lblKazanmapuani.setText(oyunEntity.getKazanmaPuani().getText().toString());
-			lbl2xSayisi.setText(oyunEntity.getSayi2x().getText().toString());
-			lbl3xSayisi.setText(oyunEntity.getSayi3x().getText().toString());
-			lblKullanilamazbolgesayisi.setText(oyunEntity.getKullanilmazBolgeSayisi().getText().toString());
-			lblOyunAlani.setText(oyunEntity.getOyunAlaniX().getText().toString()
-					+ "x" + oyunEntity.getOyunAlaniY().getText().toString());
-			lblToplamOyun.setText(oyunEntity.getToplamOyun().getText().toString());
+			lblKazanmapuani.setText(gameSetup.getKazanmaPuani().getText()
+					.toString());
+			lbl2xSayisi.setText(gameSetup.getSayi2x().getText().toString());
+			lbl3xSayisi.setText(gameSetup.getSayi3x().getText().toString());
+			lblKullanilamazbolgesayisi.setText(gameSetup
+					.getKullanilmazBolgeSayisi().getText().toString());
+			lblOyunAlani.setText(gameSetup.getOyunAlaniX().getText().toString()
+					+ "x" + gameSetup.getOyunAlaniY().getText().toString());
+			lblToplamOyun.setText(gameSetup.getToplamOyun().getText()
+					.toString());
 
-			dictionary = oyunEntity.getDictionary();
+			dictionary = gameSetup.getDictionary();
 
 			for (int i = 0; i < gridLayout.getColumns(); i++) {
 				for (int j = 0; j < gridLayout.getRows(); j++) {
 					spot[i][j] = new JButton();
 					spotList.add(spot[i][j]);
-					oyunEntity.setSpotList(spotList);
+					gameSetup.setSpotList(spotList);
 					panel_table.add(spot[i][j]);
 				}
 			}
-			election = new BoardPosition(oyunEntity);
+			election = new BoardPosition(gameSetup);
 
-			for (int k = 0; k < Integer.parseInt(oyunEntity
+			for (int k = 0; k < Integer.parseInt(gameSetup
 					.getKullanilmazBolgeSayisi().getText()); k++) {
 				election.getUniqueSpot().setVisible(false);
 			}
 
-			for (int i = 0; i < Integer.parseInt(oyunEntity.getSayi2x()
+			for (int i = 0; i < Integer.parseInt(gameSetup.getSayi2x()
 					.getText()); i++) {
 				election.getUniqueSpot().setBackground(Color.yellow);
-				election.getUniqueSpot().setText("2x");
 			}
-			for (int i = 0; i < Integer.parseInt(oyunEntity.getSayi3x()
+			for (int i = 0; i < Integer.parseInt(gameSetup.getSayi3x()
 					.getText()); i++) {
 				election.getUniqueSpot().setBackground(Color.green);
-				election.getUniqueSpot().setText("3x");
 			}
 
 		} else {

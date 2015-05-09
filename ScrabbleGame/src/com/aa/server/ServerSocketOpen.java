@@ -5,8 +5,8 @@ import java.net.ServerSocket;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.aa.entity.ScrabbleGameEnterEntity;
-import com.aa.entity.ScrabbleGameSetupEntity;
+import com.aa.entity.EnterEntity;
+import com.aa.entity.SetupEntity;
 import com.aa.forms.frmGame;
 
 public class ServerSocketOpen extends Thread {
@@ -26,7 +26,7 @@ public class ServerSocketOpen extends Thread {
 	}
 
 	@SuppressWarnings("deprecation")
-	public ServerSocketOpen(ScrabbleGameSetupEntity oyunEntity, ScrabbleGameEnterEntity oyunSetup) {
+	public ServerSocketOpen(SetupEntity oyunEntity, EnterEntity oyunSetup) {
 		try {
 			if (oyunEntity.getPortAc().getText().length() > 5|| 
 			   (oyunEntity.getPortAc().getText().toString().equals("")&& 
