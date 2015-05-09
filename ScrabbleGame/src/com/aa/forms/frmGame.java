@@ -39,7 +39,7 @@ public class frmGame extends JFrame {
 	private JLabel lbl2xSays;
 	private JLabel lbl3xSays;
 	private JLabel lblOyuncuListesi;
-	private JList<String> list;
+	private JList<String> userList;
 	private DefaultListModel<String> oyuncuModel;
 	private JPanel panel_play;
 	private JLabel lblKelimeniziAaYazn;
@@ -231,10 +231,11 @@ public class frmGame extends JFrame {
 			panel_info.add(lblOyuncuListesi, "cell 0 8");
 
 			oyuncuModel = new DefaultListModel<String>();
-			oyuncuModel
-					.add(0, gameEnter.getKullaniciAdi().getText().toString());
-			list = new JList<String>(oyuncuModel);
-			panel_info.add(list, "cell 0 9 2 1,grow");
+			oyuncuModel.add(0, gameEnter.getKullaniciAdi().getText().toString());
+			userList = new JList<String>(oyuncuModel);
+			
+			
+			panel_info.add(userList, "cell 0 9 2 1,grow");
 
 			panel_play = new JPanel();
 			contentPane.add(panel_play, BorderLayout.SOUTH);
